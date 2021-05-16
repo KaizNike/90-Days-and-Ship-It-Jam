@@ -53,6 +53,7 @@ func set_selected(value : bool):
 	print("selection changed")
 	selected = value
 	if value:
+		GlobalSignals.emit_signal("selected_unit", get_path())
 #		set_process(true)
 		$AnimationPlayer.play("selected")
 	else:

@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -18,6 +17,10 @@ _global_script_class_icons={
 config/name="Make a RTS in 90 Days"
 run/main_scene="res://src/Example/Scenes/Example2DWorld1.tscn"
 config/icon="res://Video-Game-Controller-Icon-IDV-green-strategy.png"
+
+[autoload]
+
+GlobalSignals="*res://Autoload/global_signals.gd"
 
 [rendering]
 
