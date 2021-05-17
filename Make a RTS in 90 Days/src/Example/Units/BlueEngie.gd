@@ -36,6 +36,7 @@ func set_path(value : PoolVector2Array):
 	path = value
 	if value.size() == 0:
 		return
+	SoundManager.play_se("bark_TEST", 0.0, -121, randf())
 	set_process(true)
 	pass
 

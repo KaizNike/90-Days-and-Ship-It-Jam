@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/game_music_abundance.ogg-b343c6c864d11415b16a83e4c8b7a459.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/game_music_abundance.ogg"
+dest_files=[ "res://.import/game_music_abundance.ogg-b343c6c864d11415b16a83e4c8b7a459.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

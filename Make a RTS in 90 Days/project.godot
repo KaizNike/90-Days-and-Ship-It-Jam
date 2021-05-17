@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "SoundManagerModule",
+"language": "GDScript",
+"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+} ]
 _global_script_class_icons={
+"SoundManagerModule": ""
 }
 
 [application]
@@ -21,6 +27,11 @@ config/icon="res://Video-Game-Controller-Icon-IDV-green-strategy.png"
 [autoload]
 
 GlobalSignals="*res://Autoload/global_signals.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "sound_manager" )
 
 [rendering]
 

@@ -10,6 +10,7 @@ onready var line = $Line2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SoundManager.play_bgm("abun_TEST", 0.0, -25)
 	GlobalSignals.connect("selected_unit", self, "set_selected_unit")
 
 func set_selected_unit(unit_id):
@@ -20,6 +21,8 @@ func _unhandled_input(event):
 	if not event is InputEventMouseButton:
 		return
 	if event.button_index != BUTTON_RIGHT or not event.pressed:
+		return
+	if not target:
 		return
 	if not target.selected:
 		return
