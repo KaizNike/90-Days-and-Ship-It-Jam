@@ -9,3 +9,7 @@
  
  ### Goal:
  Score the most points by the end of the era!
+
+## The Team:
+Programmer/Designer - KaizNike (Nick Moreno) [Website](https://kaiznike.github.io/)
+<!--- Hi, add yourself to the project here! This is public facing, so add links for people to find you. (if you want) --->
