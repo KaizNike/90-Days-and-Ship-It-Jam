@@ -12,4 +12,5 @@
 
 ## The Team:
 Programmer/Designer - KaizNike (Nick Moreno) [Website](https://kaiznike.github.io/)
+Programmer - Benjamin
 <!--- Hi, add yourself to the project here! This is public facing, so add links for people to find you. (if you want) --->
