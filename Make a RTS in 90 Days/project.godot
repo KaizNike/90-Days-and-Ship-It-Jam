@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "ImageDataReource",
+"language": "GDScript",
+"path": "res://addons/angelqba.image_to_scene/image_to_scene_resource.gd"
+}, {
 "base": "Node",
 "class": "SoundManagerModule",
 "language": "GDScript",
 "path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
 } ]
 _global_script_class_icons={
+"ImageDataReource": "",
 "SoundManagerModule": ""
 }
 
@@ -31,7 +37,7 @@ SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "sound_manager" )
+enabled=PoolStringArray( "angelqba.I2S.simple_object", "angelqba.image_to_scene", "sound_manager" )
 
 [input]
 
