@@ -13,19 +13,18 @@ var start_sel_pos = Vector2()
 
 func _process(delta):
 	var m_pos = get_viewport().get_mouse_position()
-	#the next line is for moving the camera when the mouse gets tothe edge of the screen
-	#calc_move(m_pos, delta)
-	if Input.is_action_just_pressed("alt_command"):
-		move_selected_units(m_pos)
+#	calc_move(m_pos, delta)
 	if Input.is_action_just_pressed("main_command"):
+		move_selected_units(m_pos)
+	if Input.is_action_just_pressed("alt_command"):
 		selection_box.start_sel_pos = m_pos
 		start_sel_pos = m_pos
-	if Input.is_action_pressed("main_command"):
+	if Input.is_action_pressed("alt_command"):
 		selection_box.m_pos = m_pos
 		selection_box.is_visible = true
 	else:
 		selection_box.is_visible = false
-	if Input.is_action_just_released("main_command"):
+	if Input.is_action_just_released("alt_command"):
 		select_units(m_pos)
 
 func calc_move(m_pos, delta):
@@ -64,8 +63,8 @@ func select_units(m_pos):
 		selected_units = new_selected_units
 
 func get_unit_under_mouse(m_pos):
-	var result = raycast_from_mouse(m_pos, 2)
-	if result:
+	var result = raycast_from_mouse(m_pos, 3)
+	if result and "team" in result.collider and result.collider.team == team:
 		return result.collider
 
 func get_units_in_box(top_left, bot_right):
@@ -80,7 +79,7 @@ func get_units_in_box(top_left, bot_right):
 	var box = Rect2(top_left, bot_right - top_left)
 	var box_selected_units = []
 	for unit in get_tree().get_nodes_in_group("units"):
-		if unit and box.has_point(cam.unproject_position(unit.global_transform.origin)):
+		if unit.team == team and box.has_point(cam.unproject_position(unit.global_transform.origin)):
 			box_selected_units.append(unit)
 	return box_selected_units
 

@@ -135,3 +135,5 @@ shape = SubResource( 6 )
 
 [node name="ExampleUnit" parent="Map" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[editable path="CamBase"]
