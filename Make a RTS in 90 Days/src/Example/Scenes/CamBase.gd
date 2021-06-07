@@ -4,6 +4,7 @@ const MOVE_MARGIN = 20
 const MOVE_SPEED = 30
 
 const ray_length = 1000
+const scroll_factor = 0.5
 onready var cam = $Camera
 
 var team = 0
@@ -12,9 +13,27 @@ onready var selection_box = $SelectionBox
 var start_sel_pos = Vector2()
 
 func _process(delta):
+	pass
+#	var m_pos = get_viewport().get_mouse_position()
+#	#the next line is for moving the camera when the mouse gets tothe edge of the screen
+#	calc_move(m_pos, delta)
+#	if Input.is_action_just_pressed("alt_command"):
+#		move_selected_units(m_pos)
+#	if Input.is_action_just_pressed("main_command"):
+#		selection_box.start_sel_pos = m_pos
+#		start_sel_pos = m_pos
+#	if Input.is_action_pressed("main_command"):
+#		selection_box.m_pos = m_pos
+#		selection_box.is_visible = true
+#	else:
+#		selection_box.is_visible = false
+#	if Input.is_action_just_released("main_command"):
+#		select_units(m_pos)
+
+func _physics_process(delta):
 	var m_pos = get_viewport().get_mouse_position()
 	#the next line is for moving the camera when the mouse gets tothe edge of the screen
-	#calc_move(m_pos, delta)
+	calc_move(m_pos, delta)
 	if Input.is_action_just_pressed("alt_command"):
 		move_selected_units(m_pos)
 	if Input.is_action_just_pressed("main_command"):
@@ -27,6 +46,24 @@ func _process(delta):
 		selection_box.is_visible = false
 	if Input.is_action_just_released("main_command"):
 		select_units(m_pos)
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+#			zoom in
+			if event.button_index == BUTTON_WHEEL_UP:
+				var fov = cam.fov
+				fov -= scroll_factor
+				fov = clamp(fov, 1, 180)
+				cam.fov = fov
+#			zoom out
+			elif event.button_index == BUTTON_WHEEL_DOWN:
+				var fov = cam.fov
+				fov += scroll_factor
+				fov = clamp(fov, 1, 180)
+				cam.fov = fov
+				
+			
 
 func calc_move(m_pos, delta):
 	var v_size = get_viewport().size
@@ -46,6 +83,12 @@ func move_selected_units(m_pos):
 	var result = raycast_from_mouse(m_pos, 1)
 	if result:
 		for unit in selected_units:
+			var auth = get_parent().playerRez[0]
+			if auth > 0:
+				get_parent().playerRez[0] -= 1
+			else:
+				return
+			unit.look_at(-result.position, Vector3.UP)
 			unit.move_to(result.position)
 
 func select_units(m_pos):
@@ -62,6 +105,10 @@ func select_units(m_pos):
 		for unit in new_selected_units:
 			unit.select()
 		selected_units = new_selected_units
+	elif new_selected_units.size() == 0:
+		for unit in selected_units:
+			unit.deselect()
+		selected_units.clear()
 
 func get_unit_under_mouse(m_pos):
 	var result = raycast_from_mouse(m_pos, 2)

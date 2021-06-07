@@ -8,6 +8,7 @@ onready var nav = get_parent()
 
 
 func move_to(target_pos):
+#	look_at(-target_pos, Vector3(0,1,0))
 	path = nav.get_simple_path(global_transform.origin, target_pos)
 	path_ind = 0
 

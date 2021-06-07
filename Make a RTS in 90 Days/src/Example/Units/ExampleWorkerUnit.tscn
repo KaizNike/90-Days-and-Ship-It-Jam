@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Example/Units/ExampleUnit.gd" type="Script" id=1]
-[ext_resource path="res://src/Example/Units/ExampleUnitMatBlue.tres" type="Material" id=2]
+[ext_resource path="res://src/Example/Units/RomeRed.tres" type="Material" id=2]
 
 [sub_resource type="Shader" id=7]
 
@@ -12,7 +12,7 @@ shader = SubResource( 7 )
 material = SubResource( 8 )
 size = Vector3( 0.1, 0.25, 0.1 )
 
-[sub_resource type="ConvexPolygonShape" id=3]
+[sub_resource type="ConvexPolygonShape" id=9]
 points = PoolVector3Array( -0.05, 0.125, 0.05, 0.05, 0.125, -0.05, 0.05, 0.125, 0.05, -0.05, 0.125, -0.05, -0.05, -0.125, 0.05, 0.05, -0.125, -0.05, 0.05, -0.125, 0.05, -0.05, -0.125, -0.05, 0.05, 0.125, 0.05, -0.05, 0.125, -0.05, 0.05, 0.125, -0.05, -0.05, 0.125, 0.05, 0.05, -0.125, 0.05, -0.05, -0.125, -0.05, 0.05, -0.125, -0.05, -0.05, -0.125, 0.05, 0.05, 0.125, 0.05, -0.05, -0.125, 0.05, -0.05, 0.125, 0.05, 0.05, -0.125, 0.05, 0.05, 0.125, -0.05, -0.05, -0.125, -0.05, -0.05, 0.125, -0.05, 0.05, -0.125, -0.05 )
 
 [sub_resource type="CubeMesh" id=4]
@@ -26,7 +26,7 @@ height = 0.2
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.839216, 0.937255, 0.192157, 1 )
 
-[node name="ExampleUnit" type="KinematicBody" groups=[
+[node name="ExampleWorkerUnit" type="KinematicBody" groups=[
 "units",
 ]]
 collision_layer = 2
@@ -38,10 +38,10 @@ mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 9 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0246287, 0.0651629, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0.03 )
 mesh = SubResource( 4 )
 material/0 = null
 
