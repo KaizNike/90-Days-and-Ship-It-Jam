@@ -20,9 +20,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Make a RTS in 90 Days"
+config/name="Mediterreanean: 220 B.C."
+config/description="Casual RTS set in the struggle for power over the Mediterreanean."
 run/main_scene="res://src/Example/Scenes/Example3DWorld1.tscn"
-config/icon="res://Video-Game-Controller-Icon-IDV-green-strategy.png"
+config/icon="res://220BCThumb.png"
 
 [autoload]
 
