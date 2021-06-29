@@ -25,6 +25,8 @@ func _physics_process(delta):
 		if move_vec.length() < 0.1:
 			path_ind += 1
 		else:
+			look_at(-move_vec + translation, Vector3.UP)
+#			rotation = move_vec
 			move_and_slide(move_vec.normalized() * move_speed, Vector3(0, 1, 0))
 
 func select():

@@ -54,11 +54,26 @@ transform = Transform( 0.799978, 0, -0.600029, 0, 1, 0, 0.600029, 0, 0.799978, 1
 [node name="ExampleWorkerUnit" parent="Map" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.3424, 0.409873, -647.62 )
 
+[node name="ExampleWorkerUnit2" parent="Map" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6336, 0.409873, -647.62 )
+team = 1
+
+[node name="ExampleWorkerUnit3" parent="Map" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.3424, 0.409873, -648.466 )
+team = 2
+
+[node name="ExampleWorkerUnit4" parent="Map" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.3529, 0.409873, -647.62 )
+team = 3
+
 [node name="FarmExample" parent="Map" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95.2325, 0, -649.672 )
 
 [node name="CamBase" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 121.991, 43.3025, -618.221 )
+transform = Transform( 0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 111.622, 43.426, -634.972 )
+
+[node name="Camera" parent="CamBase" index="0"]
+fov = 28.5
 
 [node name="UITopLeft" type="PanelContainer" parent="."]
 margin_right = 14.0

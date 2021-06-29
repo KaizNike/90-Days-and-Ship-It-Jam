@@ -19,13 +19,13 @@ func _on_AuthorityRefresh_timeout():
 
 
 func resourceChange(value, index):
-	print(value)
+#	print(value)
 	match index:
 		0:
 			var holdAuth = playerRez[0]
 			holdAuth += value
 			holdAuth = clamp(holdAuth, RezMin[0], RezMax[0])
-			print(holdAuth)
+#			print(holdAuth)
 			playerRez[0] = holdAuth
 
 

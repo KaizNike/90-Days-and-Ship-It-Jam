@@ -1,4 +1,9 @@
-extends StaticBody
+extends Area
+
+onready var teamMesh = $StaticBody/TeamRoof
+var meshes = ["res://src/Example/Units/RomeRed.tres", "res://src/Example/Units/EgyptBlue.tres", "res://src/Example/Units/CarthageYellow.tres", "res://src/Example/Units/GreeceGreen.tres"]
+
+export var team = 0
 
 func select():
 	print("ok")
@@ -6,3 +11,6 @@ func select():
 
 func deselect():
 	$SelectionArrow.visible = false
+
+func _ready():
+	teamMesh.set_surface_material(0, load(meshes[team]))

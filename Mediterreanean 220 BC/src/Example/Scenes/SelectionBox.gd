@@ -18,4 +18,5 @@ func _process(delta):
 
 
 func _ready():
-	draw_circle(Vector2.ZERO, 25, ColorN("red"))
+#	draw_circle(Vector2.ZERO, 25, ColorN("red"))
+	pass

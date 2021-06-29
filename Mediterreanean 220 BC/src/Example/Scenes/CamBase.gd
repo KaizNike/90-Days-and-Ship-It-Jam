@@ -7,8 +7,9 @@ const ray_length = 1000
 const scroll_factor = 0.5
 onready var cam = $Camera
 
-var team = 0
+export var team = 0
 var selected_units = []
+var selected_building = null
 onready var selection_box = $SelectionBox
 var start_sel_pos = Vector2()
 
@@ -46,6 +47,8 @@ func _physics_process(delta):
 		selection_box.is_visible = false
 	if Input.is_action_just_released("main_command"):
 		select_units(m_pos)
+		if not selected_units:
+			select_buildings(m_pos)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -88,18 +91,24 @@ func move_selected_units(m_pos):
 				get_parent().playerRez[0] -= 1
 			else:
 				return
-			unit.look_at(-result.position, Vector3.UP)
+#			unit.look_at(-result.position, Vector3.UP)
+#			unit.rotation.y = (unit.global_transform.origin - result.position).y
 			unit.move_to(result.position)
 
 func select_units(m_pos):
 	var new_selected_units = []
 	if m_pos.distance_squared_to(start_sel_pos) < 16:
-		var u = get_unit_under_mouse(m_pos)
+		var u = get_collider_under_mouse(m_pos)
 		if u != null:
-			new_selected_units.append(u)
+			if "team" in u:
+				if u.team == team:
+					if u.is_in_group("units"):
+						new_selected_units.append(u)
 	else:
 		new_selected_units = get_units_in_box(start_sel_pos, m_pos)
 	if new_selected_units.size() != 0:
+		if selected_building:
+			_deselect_building()
 		for unit in selected_units:
 			unit.deselect()
 		for unit in new_selected_units:
@@ -109,9 +118,33 @@ func select_units(m_pos):
 		for unit in selected_units:
 			unit.deselect()
 		selected_units.clear()
+		
+func select_buildings(m_pos):
+	var new_selected_building = null
+	var u = get_collider_under_mouse(m_pos)
+	if u != null and u.is_in_group("buildings"):
+		new_selected_building = u
+		if selected_building == null:
+			selected_building = new_selected_building
+			selected_building.select()
+		if new_selected_building == selected_building:
+			return
+		else:
+			selected_building.deselect()
+			selected_building = new_selected_building
+			selected_building.select()
+	else:
+		if selected_building:
+			_deselect_building()
+	pass
 
-func get_unit_under_mouse(m_pos):
+func _deselect_building():
+	selected_building.deselect()
+	selected_building = null
+
+func get_collider_under_mouse(m_pos):
 	var result = raycast_from_mouse(m_pos, 2)
+#	print(result)
 	if result:
 		return result.collider
 
@@ -128,11 +161,13 @@ func get_units_in_box(top_left, bot_right):
 	var box_selected_units = []
 	for unit in get_tree().get_nodes_in_group("units"):
 		if unit and box.has_point(cam.unproject_position(unit.global_transform.origin)):
-			box_selected_units.append(unit)
+			if "team" in unit:
+				if unit.team == team:
+					box_selected_units.append(unit)
 	return box_selected_units
 
 func raycast_from_mouse(m_pos, collision_mask):
 	var ray_start = cam.project_ray_origin(m_pos)
 	var ray_end = ray_start + cam.project_ray_normal(m_pos) * ray_length
 	var space_state = get_world().direct_space_state
-	return space_state.intersect_ray(ray_start, ray_end, [], collision_mask)
+	return space_state.intersect_ray(ray_start, ray_end, [], collision_mask, true, true)
