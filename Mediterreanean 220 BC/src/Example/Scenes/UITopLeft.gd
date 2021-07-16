@@ -1,7 +1,7 @@
 extends PanelContainer
 
 func _process(delta):
-	var parent = get_parent()
+	var parent = get_parent().get_parent()
 	var rez = parent.playerRez
 	$HBoxContainer/ALab.text = "Authority: " + str(rez[0])
 	$HBoxContainer/HLab.text = "Happiness: " + str(rez[1]) + "%"

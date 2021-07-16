@@ -13,11 +13,13 @@ var selected_building = null
 onready var selection_box = $SelectionBox
 var start_sel_pos = Vector2()
 
-func _process(delta):
-	pass
-#	var m_pos = get_viewport().get_mouse_position()
-#	#the next line is for moving the camera when the mouse gets tothe edge of the screen
-#	calc_move(m_pos, delta)
+func _ready():
+	get_parent().get_node("UI/ViewportContainer").connect("move_camera", self, "on_minimap_clicked")
+
+func _physics_process(delta):
+	var m_pos = get_viewport().get_mouse_position()
+	#the next line is for moving the camera when the mouse gets tothe edge of the screen
+	calc_move(m_pos, delta)
 #	if Input.is_action_just_pressed("alt_command"):
 #		move_selected_units(m_pos)
 #	if Input.is_action_just_pressed("main_command"):
@@ -30,43 +32,47 @@ func _process(delta):
 #		selection_box.is_visible = false
 #	if Input.is_action_just_released("main_command"):
 #		select_units(m_pos)
+#		if not selected_units:
+#			select_buildings(m_pos)
 
-func _physics_process(delta):
+func _unhandled_input(event):
 	var m_pos = get_viewport().get_mouse_position()
-	#the next line is for moving the camera when the mouse gets tothe edge of the screen
-	calc_move(m_pos, delta)
-	if Input.is_action_just_pressed("alt_command"):
+	if event.is_action_pressed("alt_command"):
 		move_selected_units(m_pos)
-	if Input.is_action_just_pressed("main_command"):
+	if event.is_action_pressed("main_command") and selection_box.is_visible == false:
 		selection_box.start_sel_pos = m_pos
 		start_sel_pos = m_pos
-	if Input.is_action_pressed("main_command"):
+	if event.is_action_pressed("main_command"):
 		selection_box.m_pos = m_pos
 		selection_box.is_visible = true
 	else:
 		selection_box.is_visible = false
-	if Input.is_action_just_released("main_command"):
+	if event.is_action_released("main_command"):
 		select_units(m_pos)
 		if not selected_units:
 			select_buildings(m_pos)
-
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed():
 #			zoom in
-			if event.button_index == BUTTON_WHEEL_UP:
-				var fov = cam.fov
-				fov -= scroll_factor
-				fov = clamp(fov, 1, 180)
-				cam.fov = fov
+		if event.button_index == BUTTON_WHEEL_UP:
+			var fov = cam.fov
+			fov -= scroll_factor
+			fov = clamp(fov, 1, 180)
+			cam.fov = fov
 #			zoom out
-			elif event.button_index == BUTTON_WHEEL_DOWN:
-				var fov = cam.fov
-				fov += scroll_factor
-				fov = clamp(fov, 1, 180)
-				cam.fov = fov
-				
+		elif event.button_index == BUTTON_WHEEL_DOWN:
+			var fov = cam.fov
+			fov += scroll_factor
+			fov = clamp(fov, 1, 180)
+			cam.fov = fov
+#		var m_pos = get_viewport().get_mouse_position()
+		
 			
+
+func on_minimap_clicked(world_pos):
+	print("OK")
+	self.translation = Vector3(world_pos.x, self.translation.y, world_pos.z)
+	print(translation)
+
 
 func calc_move(m_pos, delta):
 	var v_size = get_viewport().size
