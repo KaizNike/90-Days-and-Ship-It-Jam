@@ -22,14 +22,14 @@ func _physics_process(delta):
 	calc_move(m_pos, delta)
 #	if Input.is_action_just_pressed("alt_command"):
 #		move_selected_units(m_pos)
-#	if Input.is_action_just_pressed("main_command"):
-#		selection_box.start_sel_pos = m_pos
-#		start_sel_pos = m_pos
-#	if Input.is_action_pressed("main_command"):
-#		selection_box.m_pos = m_pos
-#		selection_box.is_visible = true
-#	else:
-#		selection_box.is_visible = false
+	if Input.is_action_just_pressed("main_command"):
+		selection_box.start_sel_pos = m_pos
+		start_sel_pos = m_pos
+	if Input.is_action_pressed("main_command"):
+		selection_box.m_pos = m_pos
+		selection_box.is_visible = true
+	else:
+		selection_box.is_visible = false
 #	if Input.is_action_just_released("main_command"):
 #		select_units(m_pos)
 #		if not selected_units:
@@ -39,14 +39,14 @@ func _unhandled_input(event):
 	var m_pos = get_viewport().get_mouse_position()
 	if event.is_action_pressed("alt_command"):
 		move_selected_units(m_pos)
-	if event.is_action_pressed("main_command") and selection_box.is_visible == false:
-		selection_box.start_sel_pos = m_pos
-		start_sel_pos = m_pos
-	if event.is_action_pressed("main_command"):
-		selection_box.m_pos = m_pos
-		selection_box.is_visible = true
-	else:
-		selection_box.is_visible = false
+#	if event.is_action_pressed("main_command") and selection_box.is_visible == false:
+#		selection_box.start_sel_pos = m_pos
+#		start_sel_pos = m_pos
+#	if event.is_action_pressed("main_command"):
+#		selection_box.m_pos = m_pos
+#		selection_box.is_visible = true
+#	else:
+#		selection_box.is_visible = false
 	if event.is_action_released("main_command"):
 		select_units(m_pos)
 		if not selected_units:
@@ -117,8 +117,10 @@ func select_units(m_pos):
 			_deselect_building()
 		for unit in selected_units:
 			unit.deselect()
+		var new_unit_index = 0
 		for unit in new_selected_units:
-			unit.select()
+			unit.select(new_unit_index)
+			new_unit_index += 1
 		selected_units = new_selected_units
 	elif new_selected_units.size() == 0:
 		for unit in selected_units:

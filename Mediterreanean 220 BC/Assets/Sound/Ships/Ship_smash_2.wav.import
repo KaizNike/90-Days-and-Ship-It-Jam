@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Ship_smash_2.wav-8c626e4814441a357d95912a78daed5a.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Ships/Ship_smash_2.wav"
+dest_files=[ "res://.import/Ship_smash_2.wav-8c626e4814441a357d95912a78daed5a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

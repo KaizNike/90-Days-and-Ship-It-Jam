@@ -15,3 +15,6 @@ Programmer/Designer - KaizNike (Nick Moreno) [Website](https://kaiznike.github.i
 
 Programmer - Benjamin
 <!--- Hi, add yourself to the project here! This is public facing, so add links for people to find you. (if you want) --->
+
+## Extra Credits:
+Birth of a Hero - [Bensound.com](https://www.bensound.com/)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bensound-birthofahero.ogg-db700d405ab8a062a0d8fb50d6bdaeed.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/bensound-birthofahero.ogg"
+dest_files=[ "res://.import/bensound-birthofahero.ogg-db700d405ab8a062a0d8fb50d6bdaeed.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -2,6 +2,7 @@
 
 [ext_resource path="res://src/Example/Units/ExampleWorkerUnit.gd" type="Script" id=1]
 [ext_resource path="res://src/Example/Units/GreeceGreen.tres" type="Material" id=2]
+[ext_resource path="res://src/Example/Units/SelectionNeon.tres" type="Material" id=3]
 
 [sub_resource type="Shader" id=1]
 
@@ -10,48 +11,45 @@ shader = SubResource( 1 )
 
 [sub_resource type="CubeMesh" id=3]
 material = SubResource( 2 )
-size = Vector3( 0.1, 0.25, 0.1 )
+size = Vector3( 0.3, 0.6, 0.3 )
 
 [sub_resource type="ConvexPolygonShape" id=4]
-points = PoolVector3Array( -0.05, 0.125, 0.05, 0.05, 0.125, -0.05, 0.05, 0.125, 0.05, -0.05, 0.125, -0.05, -0.05, -0.125, 0.05, 0.05, -0.125, -0.05, 0.05, -0.125, 0.05, -0.05, -0.125, -0.05, 0.05, 0.125, 0.05, -0.05, 0.125, -0.05, 0.05, 0.125, -0.05, -0.05, 0.125, 0.05, 0.05, -0.125, 0.05, -0.05, -0.125, -0.05, 0.05, -0.125, -0.05, -0.05, -0.125, 0.05, 0.05, 0.125, 0.05, -0.05, -0.125, 0.05, -0.05, 0.125, 0.05, 0.05, -0.125, 0.05, 0.05, 0.125, -0.05, -0.05, -0.125, -0.05, -0.05, 0.125, -0.05, 0.05, -0.125, -0.05 )
+points = PoolVector3Array( -0.15, 0.3, 0.15, 0.15, 0.3, -0.15, 0.15, 0.3, 0.15, -0.15, 0.3, -0.15, -0.15, -0.3, 0.15, 0.15, -0.3, -0.15, 0.15, -0.3, 0.15, -0.15, -0.3, -0.15, 0.15, 0.3, 0.15, -0.15, 0.3, -0.15, 0.15, 0.3, -0.15, -0.15, 0.3, 0.15, 0.15, -0.3, 0.15, -0.15, -0.3, -0.15, 0.15, -0.3, -0.15, -0.15, -0.3, 0.15, 0.15, 0.3, 0.15, -0.15, -0.3, 0.15, -0.15, 0.3, 0.15, 0.15, -0.3, 0.15, 0.15, 0.3, -0.15, -0.15, -0.3, -0.15, -0.15, 0.3, -0.15, 0.15, -0.3, -0.15 )
 
 [sub_resource type="CubeMesh" id=5]
-size = Vector3( 0.08, 0.05, 0.08 )
+size = Vector3( 0.15, 0.05, 0.08 )
 
 [sub_resource type="CylinderMesh" id=6]
 top_radius = 0.1
 bottom_radius = 0.001
 height = 0.2
 
-[sub_resource type="SpatialMaterial" id=7]
-albedo_color = Color( 0.839216, 0.937255, 0.192157, 1 )
-
-[sub_resource type="CylinderMesh" id=8]
+[sub_resource type="CylinderMesh" id=7]
 top_radius = 0.01
 bottom_radius = 0.01
 height = 0.35
 
-[sub_resource type="OpenSimplexNoise" id=9]
+[sub_resource type="OpenSimplexNoise" id=8]
 period = 5.0
 
-[sub_resource type="NoiseTexture" id=10]
+[sub_resource type="NoiseTexture" id=9]
 width = 1028
 height = 1028
 seamless = true
-noise = SubResource( 9 )
+noise = SubResource( 8 )
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="SpatialMaterial" id=10]
 albedo_color = Color( 0.427451, 0.392157, 0.321569, 1 )
-albedo_texture = SubResource( 10 )
+albedo_texture = SubResource( 9 )
 
-[sub_resource type="CubeMesh" id=12]
+[sub_resource type="CubeMesh" id=11]
 size = Vector3( 0.02, 0.05, 0.05 )
 
-[sub_resource type="SpatialMaterial" id=13]
+[sub_resource type="SpatialMaterial" id=12]
 metallic = 0.62
 metallic_specular = 0.25
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 resource_name = "searching"
 length = 2.8
 tracks/0/type = "bezier"
@@ -100,7 +98,7 @@ material/0 = ExtResource( 2 )
 shape = SubResource( 4 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0.03 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.172398, 0.145415 )
 mesh = SubResource( 5 )
 material/0 = null
 
@@ -108,23 +106,23 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0297131, 0.46133, 0 )
 visible = false
 mesh = SubResource( 6 )
-material/0 = SubResource( 7 )
+material/0 = ExtResource( 3 )
 
 [node name="ToolBasin" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.292267, 0.152952 )
 
 [node name="HoeShaft" type="MeshInstance" parent="ToolBasin"]
 visible = false
-mesh = SubResource( 8 )
-material/0 = SubResource( 11 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 10 )
 
 [node name="HoeHead" type="MeshInstance" parent="ToolBasin/HoeShaft"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.157402, 0.0185869 )
-mesh = SubResource( 12 )
-material/0 = SubResource( 13 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/searching = SubResource( 14 )
+anims/searching = SubResource( 13 )
 
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0657196, 0 )

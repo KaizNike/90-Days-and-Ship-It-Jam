@@ -9,6 +9,11 @@ onready var authTimer = $AuthorityRefresh
 
 
 func _ready():
+#	Works
+#	SoundManager.play_bgm("res://Assets/Sound/game_music_abundance.ogg")
+#	Doesn't work
+#	SoundManager.play_bgm("abun")
+	SoundManager.play_bgm("res://Assets/Sound/Music/bensound-birthofahero.ogg", 5, -12)
 	happinessChange(playerRez[1])
 
 

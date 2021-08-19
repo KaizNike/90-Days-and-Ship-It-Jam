@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bensound-birthofahero.mp3-119a513f310855cc7bd6e7bce7f9eedb.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/bensound-birthofahero.mp3"
+dest_files=[ "res://.import/bensound-birthofahero.mp3-119a513f310855cc7bd6e7bce7f9eedb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
