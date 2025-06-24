@@ -1,0 +1,231 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Font/papyrus.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Image/Mappa_di_Eratostene.jpg" type="Texture" id=2]
+[ext_resource path="res://220BCThumb.png" type="Texture" id=3]
+[ext_resource path="res://src/Scenes/StartScene.gd" type="Script" id=4]
+[ext_resource path="res://src/Scenes/ErasthatonesSieve.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fadeinout"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.278431 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="StartScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/CenterContainer"]
+margin_left = 179.0
+margin_top = 94.0
+margin_right = 830.0
+margin_bottom = 491.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 644.0
+margin_bottom = 390.0
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer"]
+margin_right = 637.0
+margin_bottom = 77.0
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/HSplitContainer"]
+margin_right = 541.0
+margin_bottom = 77.0
+custom_fonts/font = SubResource( 1 )
+text = "Mediterreanean: 220 BC"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/HSplitContainer"]
+margin_left = 553.0
+margin_right = 637.0
+margin_bottom = 77.0
+texture = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 81.0
+margin_right = 637.0
+margin_bottom = 337.0
+rect_min_size = Vector2( 0, 256 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="SelectLabel" type="Label" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 341.0
+margin_right = 637.0
+margin_bottom = 355.0
+text = "Select Nation"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/SelectLabel"]
+anims/RESET = SubResource( 2 )
+anims/fadeinout = SubResource( 3 )
+
+[node name="NationsHBox" type="HBoxContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 359.0
+margin_right = 637.0
+margin_bottom = 383.0
+
+[node name="CarthageContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox"]
+margin_right = 137.0
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/CarthageContainer"]
+margin_right = 58.0
+margin_bottom = 24.0
+editable = false
+
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/CarthageContainer"]
+margin_left = 70.0
+margin_right = 137.0
+margin_bottom = 24.0
+text = "Carthage"
+
+[node name="RomeContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox"]
+margin_left = 141.0
+margin_right = 260.0
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/RomeContainer"]
+margin_right = 58.0
+margin_bottom = 24.0
+editable = false
+
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/RomeContainer"]
+margin_left = 70.0
+margin_right = 119.0
+margin_bottom = 24.0
+text = "Rome"
+
+[node name="GreeceContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox"]
+margin_left = 264.0
+margin_right = 392.0
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/GreeceContainer"]
+margin_right = 58.0
+margin_bottom = 24.0
+editable = false
+
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/GreeceContainer"]
+margin_left = 70.0
+margin_right = 128.0
+margin_bottom = 24.0
+text = "Greece"
+
+[node name="EgyptContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox"]
+margin_left = 396.0
+margin_right = 512.0
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/EgyptContainer"]
+margin_right = 58.0
+margin_bottom = 24.0
+editable = false
+
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/EgyptContainer"]
+margin_left = 70.0
+margin_right = 116.0
+margin_bottom = 24.0
+text = "Egypt"
+
+[node name="PersiaContainer" type="HSplitContainer" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox"]
+margin_left = 516.0
+margin_right = 637.0
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/PersiaContainer"]
+margin_right = 58.0
+margin_bottom = 24.0
+editable = false
+
+[node name="Button" type="Button" parent="PanelContainer/CenterContainer/PanelContainer/VBoxContainer/NationsHBox/PersiaContainer"]
+margin_left = 70.0
+margin_right = 121.0
+margin_bottom = 24.0
+text = "Persia"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -101.0
+margin_bottom = 34.0
+
+[node name="QuitButton" type="Button" parent="PanelContainer2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 94.0
+margin_bottom = 27.0
+text = "QUIT GAME"
+
+[node name="ErasthatonesSieve" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -38.0
+script = ExtResource( 5 )
+
+[node name="LineEdit" type="LineEdit" parent="ErasthatonesSieve"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 68.0
+margin_bottom = 31.0
+text = "PRIMES"
+expand_to_text_length = true
+
+[node name="Timer" type="Timer" parent="ErasthatonesSieve"]
+wait_time = 7.0
+autostart = true
+
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+margin_right = 14.0
+
+[connection signal="pressed" from="PanelContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="timeout" from="ErasthatonesSieve/Timer" to="ErasthatonesSieve" method="_on_Timer_timeout"]

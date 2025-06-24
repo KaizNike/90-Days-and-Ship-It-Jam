@@ -4,7 +4,7 @@ const MOVE_MARGIN = 20
 const MOVE_SPEED = 30
 
 const ray_length = 1000
-const scroll_factor = 0.5
+const scroll_factor = 0.95
 onready var cam = $Camera
 
 export var team = 0

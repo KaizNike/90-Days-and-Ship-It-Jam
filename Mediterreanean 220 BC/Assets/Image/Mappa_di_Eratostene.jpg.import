@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/remove_icon.svg-ba717f4e40a57b2610d1336cbdfd7272.stex"
+path="res://.import/Mappa_di_Eratostene.jpg-37086dba9ea416b8c737656d6587744f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/sound_manager/dock/assets/remove_icon.svg"
-dest_files=[ "res://.import/remove_icon.svg-ba717f4e40a57b2610d1336cbdfd7272.stex" ]
+source_file="res://Assets/Image/Mappa_di_Eratostene.jpg"
+dest_files=[ "res://.import/Mappa_di_Eratostene.jpg-37086dba9ea416b8c737656d6587744f.stex" ]
 
 [params]
 

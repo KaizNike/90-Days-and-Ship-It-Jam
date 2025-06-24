@@ -1,11 +1,14 @@
 # [90 Days and Ship It Jam](https://itch.io/jam/90-day-ship-it-jam-2021)
  For 90 days we will work at building an RTS!
  
+ ### MADE IN
+ Godot 3.5.3
+ 
  ### Setting:
  220 B.C. Mediterranean Sea
  
  ### Nations:
- Rome, Carthage, Greece, and Egypt
+ Rome, Carthage, Greece, and Egypt + Persia
  
  ### Goal:
  Score the most points by the end of the era!
