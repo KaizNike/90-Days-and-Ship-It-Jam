@@ -30,10 +30,6 @@ config/icon="res://220BCThumb.png"
 GlobalSignals="*res://Autoload/global_signals.gd"
 SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
-[display]
-
-window/size/fullscreen=true
-
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/sound_manager/plugin.cfg" )
