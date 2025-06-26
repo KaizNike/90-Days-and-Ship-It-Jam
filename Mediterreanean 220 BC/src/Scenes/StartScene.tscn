@@ -97,10 +97,29 @@ margin_top = 7.0
 margin_right = 267.0
 margin_bottom = 57.0
 
-[node name="Label" type="Label" parent="MultiPanel/VSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MultiPanel/VSplitContainer"]
 margin_right = 260.0
 margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer"]
+margin_right = 169.0
+margin_bottom = 14.0
 text = "Multiplayer Lobby Settings"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MultiPanel/VSplitContainer/HSplitContainer"]
+margin_left = 181.0
+margin_right = 260.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+text = "Players:"
+
+[node name="PlayerCount" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
+margin_left = 62.0
+margin_right = 79.0
+margin_bottom = 14.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MultiPanel/VSplitContainer"]
 margin_top = 26.0
@@ -112,7 +131,7 @@ margin_right = 47.0
 margin_bottom = 24.0
 text = "HOST"
 
-[node name="LineEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HBoxContainer"]
+[node name="IPEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HBoxContainer"]
 margin_left = 51.0
 margin_right = 215.0
 margin_bottom = 24.0
