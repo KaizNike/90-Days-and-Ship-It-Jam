@@ -2,7 +2,7 @@
  For 90 days we will work at building an RTS!
  
  ### MADE IN
- Godot 3.5.3
+ Godot 3.6.1
  
  ### Setting:
  220 B.C. Mediterranean Sea

@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Mediterreanean: 220 B.C."
 config/description="Casual RTS set in the struggle for power over the Mediterreanean."
-run/main_scene="res://src/Example/Scenes/Example3DWorld3.tscn"
+run/main_scene="res://src/Scenes/StartScene.tscn"
 config/icon="res://220BCThumb.png"
 
 [autoload]
@@ -38,12 +38,12 @@ enabled=PoolStringArray( "res://addons/sound_manager/plugin.cfg" )
 
 main_command={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 alt_command={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 add={

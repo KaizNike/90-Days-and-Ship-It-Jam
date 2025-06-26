@@ -1,10 +1,11 @@
 extends Control
 
-remotesync var players = {"carthage":0,"rome":0,"greece":0,"egypt":0,"persia":0}
-var currentSelection = ""
-var net = NetworkedMultiplayerENet.new()
+remotesync var players := {"carthage":[],"rome":[],"greece":[],"egypt":[],"persia":[]}
+var connectedIds := []
+var currentSelection := ""
+var net := NetworkedMultiplayerENet.new()
 
-var playersNum = 0
+remotesync var playersNum := 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -18,12 +19,13 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	SoundManager.play_bgm("res://Assets/Sound/Music/bensound-birthofahero.ogg")
+#	SoundManager.play_bgm("res://Assets/Sound/Music/bensound-birthofahero.ogg")
 	pass # Replace with function body.
 
 
 func _on_QuitButton_pressed():
 	net.close_connection(5)
+	get_tree().network_peer = null
 	get_tree().quit()
 	pass # Replace with function body.
 
@@ -31,13 +33,14 @@ func _on_QuitButton_pressed():
 func _on_HostButton_pressed():
 	if not get_tree().is_network_server():
 		$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.disabled = true
-		var err = net.create_server(11111,16)
+		var err = net.create_server(int($MultiPanel/VSplitContainer/HBoxContainer/PortEdit.text),int($MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text))
 		print(err)
 		get_tree().network_peer = net
 		print(get_tree().get_network_peer())
 		$MultiPanel/VSplitContainer/HBoxContainer/HostButton.text = "STOP"
 		playersNum = 1
 		update_player_count()
+		print("ID: " + str(get_tree().get_network_unique_id()))
 	else:
 		net.close_connection()
 		get_tree().network_peer = null
@@ -45,10 +48,26 @@ func _on_HostButton_pressed():
 		$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.disabled = false
 		$MultiPanel/VSplitContainer/HBoxContainer/HostButton.text = "HOST"
 		for country in players:
-			country = 0
-		select_nation(currentSelection)
+			players[country].clear()
+		select_nation(currentSelection,0)
 		playersNum = 0
 		update_player_count()
+	pass # Replace with function body.
+
+
+# Should Connect to the server at IPEdit and port 11111
+func _on_JoinButton_pressed():
+	if get_tree().get_network_peer() != null:
+		net.close_connection()
+		$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.text = "JOIN"
+		get_tree().network_peer = null
+		return
+	var err = net.create_client($MultiPanel/VSplitContainer/HBoxContainer/IPEdit.text,int($MultiPanel/VSplitContainer/HBoxContainer/PortEdit.text)) #11111
+	print(err)
+	if not err == OK:
+		return
+	get_tree().network_peer = net
+	$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.text = "LEAVE"
 	pass # Replace with function body.
 
 
@@ -60,57 +79,58 @@ func update_player_count():
 
 
 func _on_PButton_pressed():
-	if get_tree().network_peer:
-		rpc("select_nation", "persia")
-	select_nation("persia")
+	nation_select_pressed("persia")
 
 
 func _on_EButton_pressed():
-	if get_tree().network_peer:
-		rpc("select_nation", "egypt")
-	else:
-		select_nation("egypt")
+	nation_select_pressed("egypt")
 
 
 func _on_GButton_pressed():
-	if get_tree().network_peer:
-		rpc("select_nation", "greece")
-	else:
-		select_nation("greece")
+	nation_select_pressed("greece")
 
 
 func _on_RButton_pressed():
-	if get_tree().network_peer:
-		rpc("select_nation", "rome")
-	else:
-		select_nation("rome")
+	nation_select_pressed("rome")
 
 
 func _on_CButton_pressed():
-	if get_tree().network_peer:
-		rpc("select_nation", "carthage")
+	nation_select_pressed("carthage")
+
+
+func nation_select_pressed(nation:String):
+	if get_tree().network_peer != null:
+		if get_tree().network_peer.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED:
+			rpc("select_nation", nation, get_tree().get_network_unique_id())
 	else:
-		select_nation("carthage")
+		select_nation(nation,0)
+	currentSelection = nation
 
 
-remotesync func select_nation(val:String):
+remotesync func select_nation(val:String, id: int):
 	if currentSelection == val:
+		update_numbers()
 		return
-	elif currentSelection != "":
-		if players[currentSelection] > 0:
-			players[currentSelection] -= 1
-	players[val] += 1
-	currentSelection = val
+	elif currentSelection != "" and currentSelection != null:
+		if players[currentSelection].size() > 0:
+			if get_tree().network_peer != null:
+				var find = players[currentSelection].find(id)
+				if not find == -1:
+					players[currentSelection].remove(find)
+			else:
+				players[currentSelection].clear()
+	players[val].append(id)
 	update_numbers()
+	return
 	
 
 func update_numbers():
 	for key in players.keys():
-		if players.get(key) == 0:
+		if players.get(key).size() == 0:
 			update_line_edit(key,"")
 			pass
 		else:
-			update_line_edit(key,str(players.get(key)))
+			update_line_edit(key,str(players.get(key).size()))
 		pass
 		
 
@@ -133,31 +153,72 @@ func update_line_edit(country:String, val:String):
 			pass
 
 
-# Should Connect to the server at IPEdit and port 11111
-func _on_JoinButton_pressed():
-	if get_tree().get_network_peer():
-		net.close_connection()
-		$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.text = "JOIN"
-	var err = net.create_client($MultiPanel/VSplitContainer/HBoxContainer/IPEdit.text,11111)
-	print(err)
-	if not err == OK:
-		return
-	get_tree().network_peer = net
-	$MultiPanel/VSplitContainer/HBoxContainer/JoinButton.text = "LEAVE"
-	pass # Replace with function body.
-
-
 func _on_TextureRect_mouse_entered():
 	$PanelContainer4/VBoxContainer/HSplitContainer/TextureRect/AudioStreamPlayer2D.play() # Replace with function body.
 
 
-func _player_connected():
+func _player_connected(id):
+	if get_tree().get_network_connected_peers().size() > int($MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text):
+		net.disconnect_peer(id,true)
+		return
+	connectedIds.append(id)
 	playersNum += 1
 	update_player_count()
 	pass
 	
 
-func _player_disconnected():
+func _player_disconnected(id):
+	var search = connectedIds.find(id)
+	if search != -1:
+		connectedIds.remove(search)
 	playersNum -= 1
 	update_player_count()
 	pass
+	
+# remote or rpc, trying puppet
+puppet func sync_data(countries:Dictionary,playersNumV:int):
+	if countries.size() != 5:
+		return
+	for country in players:
+		players[country].clear()
+	playersNum = playersNumV
+	players = countries.duplicate(true)
+	pass
+
+
+master func request_sync(id):
+	if get_tree().get_network_connected_peers().size() > int($MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text):
+		net.disconnect_peer(id,true)
+		return
+	rpc_id(id,"sync_data",players,playersNum)
+
+
+func _connected_ok():
+	print("ID: " + str(get_tree().get_network_unique_id()))
+	rpc_id(1,"request_sync",get_tree().get_network_unique_id())
+	pass
+
+
+func _connected_fail():
+	print("Didn't connect.")
+	pass
+	
+
+func _server_disconnected():
+	print("Server offline.")
+	for country in players:
+		players[country].clear()
+	players[currentSelection].append(0)
+	pass
+
+
+func _on_LineEdit_text_changed(new_text):
+	if int(new_text):
+		if int(new_text) > 4095:
+			$MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text = str(4095)
+		if int(new_text) < 1:
+			$MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text = str(1)
+		$MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text = str(int($MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text))
+	else:
+		$MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit.text = str(16)
+	pass # Replace with function body.

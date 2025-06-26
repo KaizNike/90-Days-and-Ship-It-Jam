@@ -88,52 +88,80 @@ autostart = true
 [node name="MultiPanel" type="PanelContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -64.0
-margin_right = 274.0
+margin_top = -74.0
+margin_right = 342.0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MultiPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 267.0
-margin_bottom = 57.0
+margin_right = 335.0
+margin_bottom = 67.0
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MultiPanel/VSplitContainer"]
-margin_right = 260.0
-margin_bottom = 14.0
+margin_right = 328.0
+margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer"]
+margin_top = 5.0
 margin_right = 169.0
-margin_bottom = 14.0
+margin_bottom = 19.0
 text = "Multiplayer Lobby Settings"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MultiPanel/VSplitContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HBoxContainer" parent="MultiPanel/VSplitContainer/HSplitContainer"]
 margin_left = 181.0
-margin_right = 260.0
-margin_bottom = 14.0
+margin_right = 328.0
+margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
+margin_top = 5.0
 margin_right = 50.0
-margin_bottom = 14.0
+margin_bottom = 19.0
 text = "Players:"
 
 [node name="PlayerCount" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
-margin_left = 62.0
-margin_right = 79.0
-margin_bottom = 14.0
+margin_left = 54.0
+margin_top = 5.0
+margin_right = 54.0
+margin_bottom = 19.0
+
+[node name="Label2" type="Label" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
+margin_left = 58.0
+margin_top = 5.0
+margin_right = 63.0
+margin_bottom = 19.0
+text = "/"
+
+[node name="LineEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer"]
+margin_left = 67.0
+margin_right = 125.0
+margin_bottom = 24.0
+text = "16"
+max_length = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MultiPanel/VSplitContainer"]
-margin_top = 26.0
-margin_right = 260.0
-margin_bottom = 50.0
+margin_top = 36.0
+margin_right = 328.0
+margin_bottom = 60.0
 
 [node name="HostButton" type="Button" parent="MultiPanel/VSplitContainer/HBoxContainer"]
 margin_right = 47.0
 margin_bottom = 24.0
 text = "HOST"
 
-[node name="IPEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HBoxContainer"]
+[node name="PortEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HBoxContainer"]
 margin_left = 51.0
-margin_right = 215.0
+margin_right = 115.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 64, 0 )
+hint_tooltip = "An IP Address goes here, be careful!"
+text = "11111"
+max_length = 5
+secret = true
+expand_to_text_length = true
+
+[node name="IPEdit" type="LineEdit" parent="MultiPanel/VSplitContainer/HBoxContainer"]
+margin_left = 119.0
+margin_right = 283.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 164, 0 )
 hint_tooltip = "An IP Address goes here, be careful!"
@@ -142,8 +170,8 @@ secret = true
 expand_to_text_length = true
 
 [node name="JoinButton" type="Button" parent="MultiPanel/VSplitContainer/HBoxContainer"]
-margin_left = 219.0
-margin_right = 260.0
+margin_left = 287.0
+margin_right = 328.0
 margin_bottom = 24.0
 text = "JOIN"
 
@@ -291,8 +319,22 @@ margin_right = 637.0
 margin_bottom = 538.0
 text = "START GAME >"
 
+[node name="PanelContainer3" type="PanelContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="PanelContainer3"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 127.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 120, 0 )
+text = "Threats can arrive from online play, recommended for LAN so you can hit the troublemaker."
+autowrap = true
+
 [connection signal="pressed" from="PanelContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="ErasthatonesSieve/Timer" to="ErasthatonesSieve" method="_on_Timer_timeout"]
+[connection signal="text_changed" from="MultiPanel/VSplitContainer/HSplitContainer/HSplitContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="MultiPanel/VSplitContainer/HBoxContainer/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="MultiPanel/VSplitContainer/HBoxContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="mouse_entered" from="PanelContainer4/VBoxContainer/HSplitContainer/TextureRect" to="." method="_on_TextureRect_mouse_entered"]

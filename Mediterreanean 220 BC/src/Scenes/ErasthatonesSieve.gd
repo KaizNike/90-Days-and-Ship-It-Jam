@@ -50,12 +50,12 @@ func sieve(num):
 	var A = {}
 	for i in range(2,num):
 		A[i] = true
-	print(A)
+#	print(A)
 	for i in range(2, sqrt(num-1)):
 		if A[i] == true:
 			for j in range(pow(i,2),num,i):
 				A[j] = false
-	print(A)
+#	print(A)
 	return A
 
 func show_next(dict:Dictionary) -> String:
