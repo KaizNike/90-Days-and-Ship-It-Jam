@@ -62,6 +62,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 94.0
 margin_bottom = 27.0
+hint_tooltip = "Don't go, the Plebs need you. But really they need you in reality more, go forth - touch grass."
 text = "QUIT GAME"
 
 [node name="ErasthatonesSieve" type="PanelContainer" parent="."]
@@ -78,6 +79,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 68.0
 margin_bottom = 31.0
+hint_tooltip = "FUN with Erathosthenes!"
 text = "PRIMES"
 expand_to_text_length = true
 
@@ -135,6 +137,7 @@ text = "/"
 margin_left = 67.0
 margin_right = 125.0
 margin_bottom = 24.0
+hint_tooltip = "I don't expect 4095 to work (max in Godot), but if it does it might make for a nice recording/story."
 text = "16"
 max_length = 4
 
@@ -153,7 +156,7 @@ margin_left = 51.0
 margin_right = 115.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 64, 0 )
-hint_tooltip = "An IP Address goes here, be careful!"
+hint_tooltip = "An IP Address goes here, be careful! Be sure its over 2000."
 text = "11111"
 max_length = 5
 secret = true
@@ -164,7 +167,7 @@ margin_left = 119.0
 margin_right = 283.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 164, 0 )
-hint_tooltip = "An IP Address goes here, be careful!"
+hint_tooltip = "An IP Address goes here, be careful! (By default it just goes locally, type one in!)"
 text = "127.0.0.1"
 secret = true
 expand_to_text_length = true
@@ -204,6 +207,7 @@ text = "Mediterreanean: 220 BC"
 margin_left = 553.0
 margin_right = 637.0
 margin_bottom = 77.0
+hint_tooltip = "Woosh."
 texture = ExtResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PanelContainer4/VBoxContainer/HSplitContainer/TextureRect"]
@@ -317,6 +321,7 @@ text = "Persia"
 margin_top = 518.0
 margin_right = 637.0
 margin_bottom = 538.0
+hint_tooltip = "If you select this before picking a nation, its a 0 player game."
 text = "START GAME >"
 
 [node name="PanelContainer3" type="PanelContainer" parent="."]
@@ -326,10 +331,11 @@ margin_bottom = 14.0
 [node name="Label" type="Label" parent="PanelContainer3"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 127.0
-margin_bottom = 89.0
-rect_min_size = Vector2( 120, 0 )
-text = "Threats can arrive from online play, recommended for LAN so you can hit the troublemaker."
+margin_right = 187.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 180, 0 )
+text = "Threats can arrive from online play, recommended for LAN so you can hit the troublemaker.
+UDP Port forwarding will be needed for the host for reaching out."
 autowrap = true
 
 [connection signal="pressed" from="PanelContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
